@@ -34,10 +34,10 @@ const generateRefreshToken = (payload) => {
 };
 
 const refreshTokenPayload = (token) => {
-  const { ACCESS_TOKEN_SECRET_KEY } = process.env;
+  const { REFRESH_TOKEN_SECRET_KEY } = process.env;
 
   try {
-    const payload = jwt.verify(token, ACCESS_TOKEN_SECRET_KEY);
+    const payload = jwt.verify(token, REFRESH_TOKEN_SECRET_KEY);
     return payload;
   } catch (err) {
     return false;
