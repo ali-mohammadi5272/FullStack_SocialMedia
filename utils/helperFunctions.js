@@ -23,7 +23,17 @@ const accessTokenPayload = (token) => {
   }
 };
 
+const generateRefreshToken = (payload) => {
+  const { REFRESH_TOKEN_SECRET_KEY, REFRESH_TOKEN_EXPIRES_TIME } = process.env;
+
+  const token = jwt.sign(payload, REFRESH_TOKEN_SECRET_KEY, {
+    expiresIn: REFRESH_TOKEN_EXPIRES_TIME,
+  });
+  return token;
+};
+
 module.exports = {
   generateAccessToken,
+  generateRefreshToken,
   accessTokenPayload,
 };
