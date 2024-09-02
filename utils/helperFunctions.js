@@ -43,9 +43,15 @@ const refreshTokenPayload = (token) => {
   }
 };
 
+const decodedToken = (token) => {
+  const payload = jwt.decode(token);
+  return payload;
+};
+
 module.exports = {
   generateAccessToken,
   generateRefreshToken,
   accessTokenPayload,
   refreshTokenPayload,
+  decodedToken,
 };
