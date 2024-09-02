@@ -32,8 +32,20 @@ const generateRefreshToken = (payload) => {
   return token;
 };
 
+const refreshTokenPayload = (token) => {
+  const { ACCESS_TOKEN_SECRET_KEY } = process.env;
+
+  try {
+    const payload = jwt.verify(token, ACCESS_TOKEN_SECRET_KEY);
+    return payload;
+  } catch (err) {
+    return false;
+  }
+};
+
 module.exports = {
   generateAccessToken,
   generateRefreshToken,
   accessTokenPayload,
+  refreshTokenPayload,
 };
