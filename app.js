@@ -3,6 +3,7 @@ const dotenv = require("dotenv");
 const path = require("path");
 const helmet = require("helmet");
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
 
 dotenv.config();
 
@@ -13,7 +14,8 @@ app.use(
   helmet(),
   express.json(),
   express.urlencoded({ extended: false }),
-  express.static(path.join(process.cwd(), "public"))
+  express.static(path.join(process.cwd(), "public")),
+  cookieParser(process.env.COOKIE_SECRET_KEY)
 );
 
 module.exports = app;
