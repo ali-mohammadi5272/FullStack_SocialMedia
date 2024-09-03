@@ -95,6 +95,10 @@ const forbiddenResponse = (res) => {
   });
 };
 
+const isAllowedUser = (validRoles, userRole) => {
+  return validRoles.some((role) => role === userRole);
+};
+
 module.exports = {
   generateAccessToken,
   generateRefreshToken,
@@ -106,4 +110,5 @@ module.exports = {
   checkDBCollectionIndexes,
   userRegisterInApplication,
   forbiddenResponse,
+  isAllowedUser,
 };
