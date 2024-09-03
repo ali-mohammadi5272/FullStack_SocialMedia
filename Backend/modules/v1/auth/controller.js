@@ -1,11 +1,16 @@
 const userModel = require("./../users/model");
 const roles = require("./../../../utils/constants");
 const registerValidate = require("./../../../utils/validators/auth/register");
+const loginValidate = require("./../../../utils/validators/auth/login");
 const { phoneNumberPrefixPattern } = require("./../../../utils/patterns");
 const {
   generateAccessToken,
   hashPassword,
   checkDBCollectionIndexes,
+  isValidHashedPassword,
+  generateRefreshToken,
+  setAccessTokenCookie,
+  setRefreshTokenCookie,
 } = require("./../../../utils/helperFunctions");
 
 const register = async (req, res, next) => {
@@ -67,6 +72,45 @@ const register = async (req, res, next) => {
   }
 };
 
+const login = async (req, res, next) => {
+  const isValidRequestBody = loginValidate(req.body);
+  if (!isValidRequestBody) {
+    return res.status(422).json(loginValidate.errors);
+  }
+  const { identifier, password } = req.body;
+
+  try {
+    const user = await userModel
+      .findOne({
+        $or: [{ email: identifier }, { username: identifier }],
+      })
+      .lean();
+    if (!user) {
+      return res.status(404).json({ message: "User not found !!" });
+    }
+
+    const isValidPassword = await isValidHashedPassword(
+      password,
+      user.password
+    );
+    if (!isValidPassword) {
+      return res
+        .status(422)
+        .json({ message: "Username/Email or Password is not valid !!" });
+    }
+
+    const accessToken = generateAccessToken({ _id: user._id });
+    const refreshToken = generateRefreshToken({ _id: user._id });
+    setAccessTokenCookie(res, accessToken);
+    setRefreshTokenCookie(res, refreshToken);
+
+    return res.status(200).json({ message: "Login successfully :))" });
+  } catch (error) {
+    return next(err);
+  }
+};
+
 module.exports = {
   register,
+  login,
 };
