@@ -12,6 +12,11 @@ const schema = new mongoose.Schema(
       trim: true,
       required: true,
     },
+    roomId: {
+      type: mongoose.Types.ObjectId,
+      ref: "Room",
+      required: true,
+    },
     edited: {
       type: Number,
       enum: [0, 1],
