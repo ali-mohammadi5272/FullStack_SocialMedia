@@ -88,6 +88,13 @@ const userRegisterInApplication = async (req) => {
   }
 };
 
+const forbiddenResponse = (res) => {
+  return res.status(403).json({
+    message:
+      "You are not allowed to access this page because you are not authenticated or have no permissions to access this page.",
+  });
+};
+
 module.exports = {
   generateAccessToken,
   generateRefreshToken,
@@ -98,4 +105,5 @@ module.exports = {
   isValidHashedPassword,
   checkDBCollectionIndexes,
   userRegisterInApplication,
+  forbiddenResponse,
 };
