@@ -1,0 +1,1 @@
+const messageModel = require("./model");
