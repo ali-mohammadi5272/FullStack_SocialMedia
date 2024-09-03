@@ -1,0 +1,1 @@
+const namespaceModel = require("./model");
