@@ -55,6 +55,12 @@ const schema = new mongoose.Schema(
       enum: [roles.MANAGER, roles.ADMIN, roles.USER],
       default: roles.USER,
     },
+    password: {
+      type: String,
+      minLength: 8,
+      trim: true,
+      required: true,
+    },
   },
   { timestamps: true }
 );

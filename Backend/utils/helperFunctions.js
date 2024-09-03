@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const dotenv = require("dotenv");
+const userModel = require("./../modules/v1/users/model");
 
 dotenv.config();
 
@@ -62,6 +63,62 @@ const isValidHashedPassword = async (password, hashedPassword) => {
   return isValidPassword;
 };
 
+const checkDBCollectionIndexes = async (model) => {
+  try {
+    await model.listIndexes();
+  } catch (err) {
+    await model.createIndexes();
+  }
+};
+
+const userRegisterInApplication = async (req) => {
+  try {
+    const { accessToken, refreshToken } = req.signedCookies;
+    const accessTokenPayload = accessTokenPayload(accessToken);
+    const refreshTokenPayload = refreshTokenPayload(refreshToken);
+    const { _id } = refreshTokenPayload;
+
+    const user = await userModel.findOne({ _id }).select("-__v -password");
+    if (!user) {
+      return false;
+    }
+    return user;
+  } catch (error) {
+    return false;
+  }
+};
+
+const forbiddenResponse = (res) => {
+  return res.status(403).json({
+    message:
+      "You are not allowed to access this page because you are not authenticated or have no permissions to access this page.",
+  });
+};
+
+const isAllowedUser = (validRoles, userRole) => {
+  return validRoles.some((role) => role === userRole);
+};
+
+const setAccessTokenCookie = (res, token) => {
+  res.cookie("accessToken", token, {
+    maxAge: 1000 * 60 * 60,
+    httpOnly: true,
+    path: "/",
+    secure: true,
+    signed: true,
+  });
+};
+
+const setRefreshTokenCookie = (res, token) => {
+  res.cookie("refreshToken", token, {
+    maxAge: 1000 * 60 * 60 * 30,
+    httpOnly: true,
+    path: "/",
+    secure: true,
+    signed: true,
+  });
+};
+
 module.exports = {
   generateAccessToken,
   generateRefreshToken,
@@ -70,4 +127,10 @@ module.exports = {
   decodedToken,
   hashPassword,
   isValidHashedPassword,
+  checkDBCollectionIndexes,
+  userRegisterInApplication,
+  forbiddenResponse,
+  isAllowedUser,
+  setAccessTokenCookie,
+  setRefreshTokenCookie,
 };
