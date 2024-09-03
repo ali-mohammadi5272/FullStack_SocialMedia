@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const dotenv = require("dotenv");
+const userModel = require("./../modules/v1/users/model");
 
 dotenv.config();
 
@@ -70,6 +71,23 @@ const checkDBCollectionIndexes = async (model) => {
   }
 };
 
+const userRegisterInApplication = async (req) => {
+  try {
+    const { accessToken, refreshToken } = req.signedCookies;
+    const accessTokenPayload = accessTokenPayload(accessToken);
+    const refreshTokenPayload = refreshTokenPayload(refreshToken);
+    const { _id } = refreshTokenPayload;
+
+    const user = await userModel.findOne({ _id }).select("-__v -password");
+    if (!user) {
+      return false;
+    }
+    return user;
+  } catch (error) {
+    return false;
+  }
+};
+
 module.exports = {
   generateAccessToken,
   generateRefreshToken,
@@ -79,4 +97,5 @@ module.exports = {
   hashPassword,
   isValidHashedPassword,
   checkDBCollectionIndexes,
+  userRegisterInApplication,
 };
