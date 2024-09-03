@@ -62,6 +62,14 @@ const isValidHashedPassword = async (password, hashedPassword) => {
   return isValidPassword;
 };
 
+const checkDBCollectionIndexes = async (model) => {
+  try {
+    await model.listIndexes();
+  } catch (err) {
+    await model.createIndexes();
+  }
+};
+
 module.exports = {
   generateAccessToken,
   generateRefreshToken,
@@ -70,4 +78,5 @@ module.exports = {
   decodedToken,
   hashPassword,
   isValidHashedPassword,
+  checkDBCollectionIndexes,
 };
