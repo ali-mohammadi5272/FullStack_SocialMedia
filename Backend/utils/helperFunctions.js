@@ -109,6 +109,16 @@ const setAccessTokenCookie = (res, token) => {
   });
 };
 
+const setRefreshTokenCookie = (res, token) => {
+  res.cookie("refreshToken", token, {
+    maxAge: 1000 * 60 * 60 * 30,
+    httpOnly: true,
+    path: "/",
+    secure: true,
+    signed: true,
+  });
+};
+
 module.exports = {
   generateAccessToken,
   generateRefreshToken,
@@ -122,4 +132,5 @@ module.exports = {
   forbiddenResponse,
   isAllowedUser,
   setAccessTokenCookie,
+  setRefreshTokenCookie,
 };
