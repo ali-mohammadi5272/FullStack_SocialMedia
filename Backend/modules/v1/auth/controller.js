@@ -56,13 +56,10 @@ const register = async (req, res, next) => {
     Reflect.deleteProperty(newUserObject, "__v");
 
     const accessToken = generateAccessToken({ _id: newUserObject._id });
-    res.cookie("accessToken", accessToken, {
-      maxAge: 1000 * 60 * 24,
-      httpOnly: true,
-      path: "/",
-      secure: true,
-      signed: true,
-    });
+    const refreshToken = generateRefreshToken({ _id: user._id });
+    setAccessTokenCookie(res, accessToken);
+    setRefreshTokenCookie(res, refreshToken);
+
     return res.status(201).json({
       message: "User registered successfully :))",
       user: newUserObject,
