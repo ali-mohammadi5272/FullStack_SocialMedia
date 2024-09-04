@@ -141,4 +141,31 @@ const getRoomsByNamespace = async (req, res, next) => {
   }
 };
 
-module.exports = { createRoom, getAll, getRoomsByNamespace };
+const getRoom = async (req, res, next) => {
+  const { id } = req.params;
+  const isValidId = isValidObjectId(id);
+  if (!isValidId) {
+    return res.status(422).json({ message: "RoomId is not valid !!" });
+  }
+
+  try {
+    const room = await roomModel
+      .findOne({ _id: id })
+      .populate("namespaceId", "title href")
+      .select("-__v")
+      .lean();
+
+    if (!room) {
+      return res.status(422).json({ message: "Room not found !!" });
+    }
+
+    room.namespace = room.namespaceId;
+    delete room.namespaceId;
+
+    return res.status(200).json(room);
+  } catch (err) {
+    next(err);
+  }
+};
+
+module.exports = { createRoom, getAll, getRoomsByNamespace, getRoom };
