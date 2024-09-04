@@ -1,7 +1,7 @@
 const userModel = require("./../users/model");
-const roles = require("./../../../utils/constants");
 const registerValidate = require("./../../../utils/validators/auth/register");
 const loginValidate = require("./../../../utils/validators/auth/login");
+const { roles } = require("./../../../utils/constants");
 const { phoneNumberPrefixPattern } = require("./../../../utils/patterns");
 const {
   generateAccessToken,

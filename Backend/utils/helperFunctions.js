@@ -74,9 +74,9 @@ const checkDBCollectionIndexes = async (model) => {
 const userRegisterInApplication = async (req) => {
   try {
     const { accessToken, refreshToken } = req.signedCookies;
-    const accessTokenPayload = accessTokenPayload(accessToken);
-    const refreshTokenPayload = refreshTokenPayload(refreshToken);
-    const { _id } = refreshTokenPayload;
+    const accessTokenPayloadData = accessTokenPayload(accessToken);
+    const refreshTokenPayloadData = refreshTokenPayload(refreshToken);
+    const { _id } = accessTokenPayloadData;
 
     const user = await userModel.findOne({ _id }).select("-__v -password");
     if (!user) {
@@ -101,7 +101,7 @@ const isAllowedUser = (validRoles, userRole) => {
 
 const setAccessTokenCookie = (res, token) => {
   res.cookie("accessToken", token, {
-    maxAge: 1000 * 60 * 60,
+    maxAge: 1000 * 60 * 30,
     httpOnly: true,
     path: "/",
     secure: true,
@@ -111,7 +111,7 @@ const setAccessTokenCookie = (res, token) => {
 
 const setRefreshTokenCookie = (res, token) => {
   res.cookie("refreshToken", token, {
-    maxAge: 1000 * 60 * 60 * 30,
+    maxAge: 1000 * 60 * 60 * 24 * 30,
     httpOnly: true,
     path: "/",
     secure: true,

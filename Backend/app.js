@@ -9,6 +9,7 @@ dotenv.config();
 const { VERSION } = process.env;
 
 const authRouter = require(`./modules/${VERSION}/auth/routes`);
+const namespacesRouter = require(`./modules/${VERSION}/namespaces/routes`);
 
 const app = express();
 
@@ -22,6 +23,7 @@ app.use(
 );
 
 app.use(`/api/${VERSION}/auth`, authRouter);
+app.use(`/api/${VERSION}/namespaces`, namespacesRouter);
 
 app.use((err, req, res, next) => {
   return res.status(500).json({ message: err.message });
