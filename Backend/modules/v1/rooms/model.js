@@ -5,19 +5,17 @@ const schema = new mongoose.Schema(
     title: {
       type: String,
       trim: true,
-      unique: true,
       required: true,
     },
     href: {
       type: String,
       trim: true,
-      unique: true,
       required: true,
     },
     image: {
       type: String,
       trim: true,
-      required: true,
+      default: null,
     },
     namespaceId: {
       type: mongoose.Types.ObjectId,
