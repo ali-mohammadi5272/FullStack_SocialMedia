@@ -116,4 +116,29 @@ const getAll = async (req, res, next) => {
   }
 };
 
-module.exports = { createRoom, getAll };
+const getRoomsByNamespace = async (req, res, next) => {
+  const { id } = req.params;
+  const isValidId = isValidObjectId(id);
+  if (!isValidId) {
+    return res.status(422).json({ message: "NamespaceId is not valid !!" });
+  }
+
+  try {
+    const rooms = await roomModel
+      .find({ namespaceId: id })
+      .populate("namespaceId", "title href")
+      .select("-__v")
+      .lean();
+
+    rooms.forEach((room) => {
+      room.namespace = room.namespaceId;
+      delete room.namespaceId;
+    });
+
+    return res.status(200).json(rooms);
+  } catch (err) {
+    next(err);
+  }
+};
+
+module.exports = { createRoom, getAll, getRoomsByNamespace };
