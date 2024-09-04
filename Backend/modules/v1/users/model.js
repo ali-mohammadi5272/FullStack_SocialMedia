@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const roles = require("./../../../utils/constants");
+const { roles } = require("./../../../utils/constants");
 const {
   emailPattern,
   phoneNumberPattern,
