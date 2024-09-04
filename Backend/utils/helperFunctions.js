@@ -101,7 +101,7 @@ const isAllowedUser = (validRoles, userRole) => {
 
 const setAccessTokenCookie = (res, token) => {
   res.cookie("accessToken", token, {
-    maxAge: 1000 * 60 * 60,
+    maxAge: 1000 * 60 * 30,
     httpOnly: true,
     path: "/",
     secure: true,
