@@ -3,7 +3,12 @@ const authMiddleware = require("./../../../utils/middlewares/authMiddleware");
 const accessLevelMiddleware = require("./../../../utils/middlewares/accessLevelMiddleware");
 const { roles } = require("./../../../utils/constants");
 const { uploader } = require("../../../utils/uploader");
-const { createRoom, getAll, getRoomsByNamespace } = require("./controller");
+const {
+  createRoom,
+  getAll,
+  getRoomsByNamespace,
+  getRoom,
+} = require("./controller");
 
 const router = express.Router();
 
@@ -18,5 +23,6 @@ router
   );
 
 router.route("/namespace/:id").get(getRoomsByNamespace);
+router.route("/:id").get(getRoom);
 
 module.exports = router;
