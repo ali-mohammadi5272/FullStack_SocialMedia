@@ -74,9 +74,9 @@ const checkDBCollectionIndexes = async (model) => {
 const userRegisterInApplication = async (req) => {
   try {
     const { accessToken, refreshToken } = req.signedCookies;
-    const accessTokenPayload = accessTokenPayload(accessToken);
-    const refreshTokenPayload = refreshTokenPayload(refreshToken);
-    const { _id } = refreshTokenPayload;
+    const accessTokenPayloadData = accessTokenPayload(accessToken);
+    const refreshTokenPayloadData = refreshTokenPayload(refreshToken);
+    const { _id } = accessTokenPayloadData;
 
     const user = await userModel.findOne({ _id }).select("-__v -password");
     if (!user) {
