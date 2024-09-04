@@ -111,7 +111,7 @@ const setAccessTokenCookie = (res, token) => {
 
 const setRefreshTokenCookie = (res, token) => {
   res.cookie("refreshToken", token, {
-    maxAge: 1000 * 60 * 60 * 30,
+    maxAge: 1000 * 60 * 60 * 24 * 30,
     httpOnly: true,
     path: "/",
     secure: true,
