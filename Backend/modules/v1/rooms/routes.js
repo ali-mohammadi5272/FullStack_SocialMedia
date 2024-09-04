@@ -2,13 +2,14 @@ const express = require("express");
 const authMiddleware = require("./../../../utils/middlewares/authMiddleware");
 const accessLevelMiddleware = require("./../../../utils/middlewares/accessLevelMiddleware");
 const { roles } = require("./../../../utils/constants");
-const { createRoom } = require("./controller");
+const { createRoom, getAll } = require("./controller");
 const { uploader } = require("../../../utils/uploader");
 
 const router = express.Router();
 
 router
   .route("/")
+  .get(getAll)
   .post(
     authMiddleware,
     accessLevelMiddleware(roles.ADMIN),
