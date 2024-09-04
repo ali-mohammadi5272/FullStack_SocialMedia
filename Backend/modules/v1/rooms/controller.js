@@ -97,4 +97,23 @@ const createRoom = async (req, res, next) => {
   }
 };
 
-module.exports = { createRoom };
+const getAll = async (req, res, next) => {
+  try {
+    const rooms = await roomModel
+      .find({})
+      .populate("namespaceId", "title href")
+      .select("-__v")
+      .lean();
+
+    rooms.forEach((room) => {
+      room.namespace = room.namespaceId;
+      delete room.namespaceId;
+    });
+
+    return res.status(200).json(rooms);
+  } catch (err) {
+    next(err);
+  }
+};
+
+module.exports = { createRoom, getAll };
