@@ -41,4 +41,14 @@ const createNamespace = async (req, res, next) => {
   }
 };
 
-module.exports = { createNamespace };
+const getAll = async (req, res, next) => {
+  try {
+    const namespaces = await namespaceModel.find({}).select("-__v").lean();
+
+    return res.status(200).json(namespaces);
+  } catch (err) {
+    next(err);
+  }
+};
+
+module.exports = { createNamespace, getAll };
