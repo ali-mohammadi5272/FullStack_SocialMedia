@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const schema = new mongoose.Schema(
   {
-    userId: {
+    creatorId: {
       type: mongoose.Types.ObjectId,
       ref: "User",
       required: true,
@@ -12,7 +12,7 @@ const schema = new mongoose.Schema(
       trim: true,
       required: true,
     },
-    roomId: {
+    receiverId: {
       type: mongoose.Types.ObjectId,
       ref: "Room",
       required: true,
