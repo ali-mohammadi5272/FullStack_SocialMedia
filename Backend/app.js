@@ -1,4 +1,5 @@
 const express = require("express");
+const http = require("http");
 const dotenv = require("dotenv");
 const path = require("path");
 const helmet = require("helmet");
@@ -35,4 +36,6 @@ app.use((req, res) => {
   return res.status(400).json({ message: "Bad Request. Wrong Api !!" });
 });
 
-module.exports = app;
+const httpServer = http.createServer(app);
+
+module.exports = httpServer;

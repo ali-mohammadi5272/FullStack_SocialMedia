@@ -3,6 +3,7 @@ const createNamespaceValidate = require("./../../../utils/validators/namespaces/
 const {
   checkDBCollectionIndexes,
 } = require("./../../../utils/helperFunctions");
+const { isValidObjectId } = require("mongoose");
 
 const createNamespace = async (req, res, next) => {
   const isValidRequestBody = createNamespaceValidate(req.body);
@@ -41,4 +42,36 @@ const createNamespace = async (req, res, next) => {
   }
 };
 
-module.exports = { createNamespace };
+const getAll = async (req, res, next) => {
+  try {
+    const namespaces = await namespaceModel.find({}).select("-__v").lean();
+
+    return res.status(200).json(namespaces);
+  } catch (err) {
+    next(err);
+  }
+};
+
+const removeNamespace = async (req, res, next) => {
+  const { id } = req.params;
+  const isValidId = isValidObjectId(id);
+  if (!isValidId) {
+    return res.status(422).json({ message: "NamespaceId is not valid !!" });
+  }
+
+  try {
+    const namespace = await namespaceModel.findOneAndDelete({ _id: id });
+
+    if (!namespace) {
+      return res.status(422).json({ message: "Remove Namespace failed !!" });
+    }
+
+    return res
+      .status(200)
+      .json({ message: "Namespace removed successfully :))" });
+  } catch (err) {
+    next(err);
+  }
+};
+
+module.exports = { createNamespace, getAll, removeNamespace };
