@@ -1,0 +1,25 @@
+.profile {
+  display: flex;
+  align-items: center;
+  &__imageSection {
+    width: 15%;
+  }
+  &__image {
+    width: 100%;
+    height: auto;
+    border-radius: 50%;
+  }
+  &__infos {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-bottom: 10px;
+  }
+  &__username {
+    font-weight: bold;
+    font-size: 17px;
+  }
+  &__lastSeen {
+    font-size: 14px;
+  }
+}
