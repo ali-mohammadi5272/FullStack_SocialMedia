@@ -1,0 +1,26 @@
+.page {
+  height: 100vh;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 50px;
+  &__title {
+    text-align: center;
+    font-size: 200px;
+    color: coral;
+  }
+  &__link {
+    border: 1px solid #5a5a5a;
+    padding: 20px 40px;
+    font-size: 25px;
+    border-radius: 7.5px;
+    &:hover {
+      font-weight: bold;
+      background-color: white;
+      border: 1px solid white;
+      color: black;
+    }
+  }
+}
