@@ -34,6 +34,7 @@ const CustomForm = ({
           }
           keyName={input.keyName}
           placeholder={input.placeholder}
+          required={input.required}
           type={input.type}
           onChange={input.onChange}
         />
