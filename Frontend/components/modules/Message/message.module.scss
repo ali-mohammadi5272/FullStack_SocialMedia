@@ -1,0 +1,37 @@
+.message {
+  display: flex;
+  justify-content: flex-end;
+  color: white;
+  &_own {
+    justify-content: flex-end;
+  }
+  &_notOwn {
+    justify-content: flex-start;
+  }
+  &__body {
+    padding: 10px 20px;
+    width: fit-content;
+    max-width: 500px;
+    &_own {
+      background-color: #024270;
+      border-radius: 20px 5px 20px 20px;
+    }
+    &_notOwn {
+      background-color: #973a00;
+      border-radius: 5px 20px 20px 20px;
+    }
+  }
+  &__text {
+    padding: 5px 0px;
+  }
+  &__time {
+    padding: 5px 0px;
+    font-size: 16px;
+    &_own {
+      text-align: left;
+    }
+    &_notOwn {
+      text-align: right;
+    }
+  }
+}
