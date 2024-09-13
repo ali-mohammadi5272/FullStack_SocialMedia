@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   &__imageSection {
-    width: 15%;
+    width: 12.5%;
   }
   &__image {
     width: 100%;
@@ -17,9 +17,9 @@
   }
   &__username {
     font-weight: bold;
-    font-size: 17px;
+    font-size: 15px;
   }
   &__lastSeen {
-    font-size: 14px;
+    font-size: 13px;
   }
 }
