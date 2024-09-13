@@ -16,15 +16,27 @@
     width: 50%;
     font-weight: bold;
     cursor: pointer;
+    &:disabled {
+      color: white;
+      border-color: #484848;
+      &:hover {
+        background-color: #484848;
+        border-color: #484848;
+      }
+    }
   }
   &__input[type="reset"] {
+    color: crimson;
+    border: 3px solid crimson;
     &:hover {
       background-color: crimson;
-      border-color: crimson;
       color: white;
     }
   }
   &__input[type="submit"] {
+    color: #30b630;
+    border: 3px solid #30b630;
+
     &:hover {
       background-color: #30b630;
       border-color: #30b630;
