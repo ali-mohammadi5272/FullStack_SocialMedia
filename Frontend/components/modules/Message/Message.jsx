@@ -13,13 +13,13 @@ const Message = ({ body, createdAt, own }) => {
         }`}
       >
         <p className={styles.message__text}>{body}</p>
-        <p
+        <div
           className={`${styles.message__time} ${
             own ? styles.message__time_own : styles.message__time_notOwn
           }`}
         >
           {new Date(createdAt).toLocaleTimeString("ir-fa")}
-        </p>
+        </div>
       </div>
     </div>
   );
