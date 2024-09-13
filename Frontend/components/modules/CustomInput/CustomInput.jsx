@@ -1,7 +1,7 @@
 import styles from "./customInput.module.scss";
 
 const CustomInput = ({
-  name,
+  keyName,
   id,
   labelClassName,
   inputClassName,
@@ -13,7 +13,7 @@ const CustomInput = ({
     <label className={labelClassName} htmlFor={id}>
       <span>{placeholder}</span>
       <input
-        name={name}
+        data-key={keyName}
         id={id}
         className={inputClassName}
         type={type}
