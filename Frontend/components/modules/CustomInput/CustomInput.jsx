@@ -7,6 +7,7 @@ const CustomInput = ({
   inputClassName,
   type,
   placeholder,
+  required,
   onChange,
 }) => {
   return (
@@ -18,6 +19,7 @@ const CustomInput = ({
         className={inputClassName}
         type={type}
         placeholder={placeholder}
+        required={required}
         onChange={onChange}
       />
     </label>
