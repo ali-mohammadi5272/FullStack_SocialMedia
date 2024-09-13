@@ -7,6 +7,7 @@ const CustomForm = ({
   inputs,
   formOnReset,
   formOnSubmit,
+  isFormEmpty,
 }) => {
   return (
     <form
@@ -40,8 +41,18 @@ const CustomForm = ({
         />
       ))}
 
-      <input className={styles.form__input} type="reset" value="Reset" />
-      <input className={styles.form__input} type="submit" value="Submit" />
+      <input
+        className={styles.form__input}
+        disabled={!isFormEmpty}
+        type="reset"
+        value="Reset"
+      />
+      <input
+        className={styles.form__input}
+        disabled={!isFormEmpty}
+        type="submit"
+        value="Submit"
+      />
     </form>
   );
 };
