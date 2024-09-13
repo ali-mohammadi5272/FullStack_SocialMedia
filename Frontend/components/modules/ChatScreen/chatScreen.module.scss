@@ -1,0 +1,15 @@
+.chatScreen {
+  width: 75%;
+  overflow-y: hidden;
+}
+.chatSection {
+  background-color: #2d2d2d;
+  background-image: url("../../../public/images/backgrounds/bg.png");
+  overflow-y: auto;
+  padding-top: 50px;
+  height: 93vh;
+  max-height: 93vh;
+  &::-webkit-scrollbar {
+    display: none !important;
+  }
+}
