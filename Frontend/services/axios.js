@@ -1,11 +1,7 @@
 import axios from "axios";
 
-const accessToken = localStorage.getItem("accessToken");
 const axiosRequest = axios.create({
-  baseURL: process.env.BASE_URL,
-  headers: {
-    Authorization: `Bearer ${accessToken}`,
-  },
+  baseURL: `http://localhost:3000/api/v1`,
 });
 
 axiosRequest.interceptors.request.use(
