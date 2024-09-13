@@ -2,6 +2,7 @@ import "./globals.scss";
 import "react-toastify/dist/ReactToastify.css";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import AxiosProvider from "@/contexts/AxiosContext";
+import AuthProvider from "@/contexts/AuthContext";
 import { Inter } from "next/font/google";
 import { ToastContainer } from "react-toastify";
 import { config } from "@fortawesome/fontawesome-svg-core";
@@ -19,7 +20,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <AxiosProvider>{children}</AxiosProvider>
+        <AxiosProvider>
+          <AuthProvider>{children}</AuthProvider>
+        </AxiosProvider>
         <ToastContainer />
       </body>
     </html>
