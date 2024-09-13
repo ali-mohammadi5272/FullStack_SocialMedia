@@ -11,7 +11,6 @@ const AxiosProvider = ({ children }) => {
 
   axiosRequest.interceptors.response.use(
     (response) => {
-      toast.success(response.data.message);
       return response;
     },
     (err) => {
@@ -19,7 +18,6 @@ const AxiosProvider = ({ children }) => {
         toast.error(err.response.data.message);
         router.replace("/login");
       }
-      return Promise.reject(err);
     }
   );
 
