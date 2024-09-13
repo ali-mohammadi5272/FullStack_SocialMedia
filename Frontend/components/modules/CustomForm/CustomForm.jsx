@@ -32,7 +32,7 @@ const CustomForm = ({
               ? input.inputClassName
               : styles.form__input
           }
-          name={input.name}
+          keyName={input.keyName}
           placeholder={input.placeholder}
           type={input.type}
           onChange={input.onChange}
