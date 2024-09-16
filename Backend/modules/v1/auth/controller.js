@@ -56,7 +56,7 @@ const register = async (req, res, next) => {
     Reflect.deleteProperty(newUserObject, "__v");
 
     const accessToken = generateAccessToken({ _id: newUserObject._id });
-    const refreshToken = generateRefreshToken({ _id: user._id });
+    const refreshToken = generateRefreshToken({ _id: newUserObject._id });
     setAccessTokenCookie(res, accessToken);
     setRefreshTokenCookie(res, refreshToken);
 
