@@ -110,7 +110,7 @@ const RegisterPage = () => {
 
   return (
     <main className={styles.page}>
-      <h1 className={styles.page__title}>Login</h1>
+      <h1 className={styles.page__title}>Register</h1>
       <CustomForm
         formClassName={styles.page__form}
         formOnChange={formChangeHandler}
