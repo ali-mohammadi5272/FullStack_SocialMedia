@@ -4,6 +4,7 @@ import styles from "./registerPage.module.scss";
 import { useState } from "react";
 import { axiosRequest } from "@/services/axios";
 import { useRouter } from "next/navigation";
+import { setCookie } from "@/utils/helperFunctions";
 
 const RegisterPage = () => {
   const router = useRouter();
@@ -103,6 +104,25 @@ const RegisterPage = () => {
     if (formData) {
       const response = await axiosRequest.post("/auth/register", formData);
       if (response && response.status === 201) {
+        const { accessToken, refreshToken } = response.data;
+
+        const oneHour = 60 * 60;
+        const thirtyDays = 60 * 60 * 24 * 30;
+
+        setCookie({
+          key: "accessToken",
+          value: accessToken,
+          maxAge: oneHour,
+          path: "/",
+        });
+
+        setCookie({
+          key: "refreshToken",
+          value: refreshToken,
+          maxAge: thirtyDays,
+          path: "/",
+        });
+
         router.replace("/");
       }
     }
