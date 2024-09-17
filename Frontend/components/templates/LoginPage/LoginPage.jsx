@@ -1,9 +1,10 @@
 "use client";
+import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
 import styles from "./loginPage.module.scss";
 import CustomForm from "@/components/modules/CustomForm/CustomForm";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
 import { axiosRequest } from "@/services/axios";
+import { setCookie, setDataToLocalStorage } from "@/utils/helperFunctions";
 
 const LoginPage = () => {
   const router = useRouter();
@@ -57,6 +58,25 @@ const LoginPage = () => {
       try {
         const response = await axiosRequest.post("/auth/login", formData);
         if (response.status === 200) {
+          const { accessToken, refreshToken } = response.data;
+
+          const oneHour = 60 * 60;
+          const thirtyDays = 60 * 60 * 24 * 30;
+
+          setCookie({
+            key: "accessToken",
+            value: accessToken,
+            maxAge: oneHour,
+            path: "/",
+          });
+
+          setCookie({
+            key: "refreshToken",
+            value: refreshToken,
+            maxAge: thirtyDays,
+            path: "/",
+          });
+
           router.replace("/");
         }
       } catch (err) {
