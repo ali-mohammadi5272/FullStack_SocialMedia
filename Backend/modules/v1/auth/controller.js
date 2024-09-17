@@ -103,7 +103,9 @@ const login = async (req, res, next) => {
     setAccessTokenCookie(res, accessToken);
     setRefreshTokenCookie(res, refreshToken);
 
-    return res.status(200).json({ message: "Login successfully :))" });
+    return res
+      .status(200)
+      .json({ message: "Login successfully :))", accessToken, refreshToken });
   } catch (error) {
     return next(err);
   }
