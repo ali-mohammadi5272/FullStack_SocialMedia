@@ -13,6 +13,8 @@ const io = new socketIo.Server(httpServer, {
   },
 });
 
+socketIoInit(io);
+
 httpServer.listen(process.env.PORT, () => {
   console.log(`Server listening on port ${process.env.PORT}`);
 });
