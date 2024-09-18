@@ -7,6 +7,13 @@ import ChatProfile from "../ChatProfile/ChatProfile";
 const ChatProfilesContainer = () => {
   const { user, users, setContact } = useContext(AuthContext);
 
+  const joinRoom = (contact) => {
+    socketIo.emit("joinRoom", [
+      `${user.username}-${contact.username}`,
+      `${contact.username}-${user.username}`,
+    ]);
+  };
+
   useEffect(() => {
     if (socketIo) {
       socketIo.close();
