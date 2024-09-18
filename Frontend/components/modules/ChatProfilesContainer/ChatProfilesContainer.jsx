@@ -7,6 +7,14 @@ import ChatProfile from "../ChatProfile/ChatProfile";
 const ChatProfilesContainer = () => {
   const { user, users, setContact } = useContext(AuthContext);
 
+  useEffect(() => {
+    if (socketIo) {
+      socketIo.close();
+    }
+    const socket = io("ws://localhost:3000/chats");
+    setSocketIo(socket);
+  }, []);
+
   return (
     <section className={styles.chatProfilesContainer}>
       {users.map(
