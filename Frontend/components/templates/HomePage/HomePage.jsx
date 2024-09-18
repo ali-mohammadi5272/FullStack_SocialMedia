@@ -7,7 +7,9 @@ import { useRouter } from "next/navigation";
 import ChatHeader from "@/components/modules/ChatHeader/ChatHeader";
 
 const HomePage = () => {
-  const { setUser } = useContext(AuthContext);
+  const [socketIo, setSocketIo] = useState(null);
+  const { setUser, setUsers } = useContext(AuthContext);
+  const io = useContext(SocketContext);
   const router = useRouter();
 
   const getUser = async (accessToken) => {
@@ -31,6 +33,20 @@ const HomePage = () => {
     setUser(user);
   };
 
+  const socketHandler = () => {
+    if (socketIo) {
+      socketIo.close();
+    }
+    const socket = io("ws://localhost:3000");
+
+    setSocketIo(socket);
+    socket.on("connect", () => {
+      socket.on("users", (users) => {
+        setUsers(users);
+      });
+    });
+  };
+
   useEffect(() => {
     const cookies = document.cookie.split(";");
     if (!(cookies.length >= 2)) {
@@ -40,6 +56,7 @@ const HomePage = () => {
         .find((cookie) => cookie.includes("accessToken"))
         .replace(/accessToken=/, "");
       authHandler(accessToken);
+      socketHandler();
     }
   }, []);
 
