@@ -5,6 +5,7 @@ export const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [users, setUsers] = useState([]);
   const [contact, setContact] = useState(null);
 
   return (
@@ -14,6 +15,8 @@ const AuthProvider = ({ children }) => {
         setUser,
         contact,
         setContact,
+        users,
+        setUsers,
       }}
     >
       {children}
