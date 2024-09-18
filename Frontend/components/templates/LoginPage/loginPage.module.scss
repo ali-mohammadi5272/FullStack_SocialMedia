@@ -1,0 +1,16 @@
+.page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 50px;
+  height: 100vh;
+  &__title {
+    text-align: center;
+    color: white;
+    font-size: 100px;
+  }
+  &__form {
+    width: 50%;
+  }
+}
