@@ -6,6 +6,7 @@ import AuthProvider from "@/contexts/AuthContext";
 import { Inter } from "next/font/google";
 import { ToastContainer } from "react-toastify";
 import { config } from "@fortawesome/fontawesome-svg-core";
+import SocketProvider from "@/contexts/SocketProvider";
 
 config.autoAddCss = false;
 
@@ -21,7 +22,9 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         <AxiosProvider>
-          <AuthProvider>{children}</AuthProvider>
+          <AuthProvider>
+            <SocketProvider>{children}</SocketProvider>
+          </AuthProvider>
         </AxiosProvider>
         <ToastContainer />
       </body>
