@@ -1,10 +1,13 @@
 "use client";
 import styles from "./chatProfilesContainer.module.scss";
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import { AuthContext } from "@/contexts/AuthProvider";
 import ChatProfile from "../ChatProfile/ChatProfile";
+import { SocketContext } from "@/contexts/SocketProvider";
 
 const ChatProfilesContainer = () => {
+  const [socketIo, setSocketIo] = useState(null);
+  const io = useContext(SocketContext);
   const { user, users, setContact } = useContext(AuthContext);
 
   const joinRoom = (contact) => {
