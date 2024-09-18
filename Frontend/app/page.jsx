@@ -1,4 +1,4 @@
-import AuthProvider from "@/contexts/AuthContext";
+import AuthProvider from "@/contexts/AuthProvider";
 import styles from "./page.module.scss";
 import HomePage from "@/components/templates/HomePage/HomePage";
 import { cookies } from "next/headers";
