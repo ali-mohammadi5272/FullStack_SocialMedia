@@ -1,8 +1,8 @@
 import "./globals.scss";
 import "react-toastify/dist/ReactToastify.css";
 import "@fortawesome/fontawesome-svg-core/styles.css";
-import AxiosProvider from "@/contexts/AxiosContext";
-import AuthProvider from "@/contexts/AuthContext";
+import AxiosProvider from "@/contexts/AxiosProvider";
+import AuthProvider from "@/contexts/AuthProvider";
 import { Inter } from "next/font/google";
 import { ToastContainer } from "react-toastify";
 import { config } from "@fortawesome/fontawesome-svg-core";
