@@ -33,7 +33,9 @@ const HomePage = () => {
 
   useEffect(() => {
     const cookies = document.cookie.split(";");
-    if (cookies.length) {
+    if (!(cookies.length >= 2)) {
+      router.replace("/login");
+    } else {
       const accessToken = cookies
         .find((cookie) => cookie.includes("accessToken"))
         .replace(/accessToken=/, "");
