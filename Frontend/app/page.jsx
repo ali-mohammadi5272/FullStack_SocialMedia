@@ -5,8 +5,8 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 const Page = function () {
-  const refreshToken = cookies().get("refreshToken").value;
-  if (!refreshToken) {
+  const refreshToken = cookies().get("refreshToken");
+  if (!refreshToken || !refreshToken.value) {
     redirect("/login");
   }
 
