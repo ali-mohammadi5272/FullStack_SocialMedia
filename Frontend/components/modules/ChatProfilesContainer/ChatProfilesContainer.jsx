@@ -14,6 +14,11 @@ const ChatProfilesContainer = () => {
     ]);
   };
 
+  const chatProfileClickHandler = (userInfo) => {
+    setContact({ ...userInfo, isTyping: false });
+    joinRoom(userInfo);
+  };
+
   useEffect(() => {
     if (socketIo) {
       socketIo.close();
@@ -29,7 +34,7 @@ const ChatProfilesContainer = () => {
           user._id !== userInfo._id && (
             <ChatProfile
               key={userInfo._id}
-              onClick={() => setContact({ ...userInfo, isTyping: false })}
+              onClick={() => chatProfileClickHandler(userInfo)}
               imgSectionClassName={styles.chatProfilesContainer__imgSection}
               username={userInfo.username}
             />
