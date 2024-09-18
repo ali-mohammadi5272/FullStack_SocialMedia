@@ -1,8 +1,9 @@
 .profile {
   display: flex;
   align-items: center;
+  cursor: pointer;
   &__imageSection {
-    width: 12.5%;
+    width: 10%;
   }
   &__image {
     width: 100%;
