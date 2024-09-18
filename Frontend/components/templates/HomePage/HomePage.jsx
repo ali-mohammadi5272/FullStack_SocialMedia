@@ -1,10 +1,12 @@
 "use client";
-import { useEffect, useContext } from "react";
+ import { useEffect, useContext, useState } from "react";
 import styles from "./homePage.module.scss";
 import { axiosRequest } from "@/services/axios";
-import { AuthContext } from "@/contexts/AuthContext";
+import { AuthContext } from "@/contexts/AuthProvider";
 import { useRouter } from "next/navigation";
-import ChatHeader from "@/components/modules/ChatHeader/ChatHeader";
+import Sidebar from "@/components/modules/Sidebar/Sidebar";
+import ChatScreen from "@/components/modules/ChatScreen/ChatScreen";
+import { SocketContext } from "@/contexts/SocketProvider";
 
 const HomePage = () => {
   const [socketIo, setSocketIo] = useState(null);
@@ -62,7 +64,8 @@ const HomePage = () => {
 
   return (
     <main className={styles.main}>
-      <ChatHeader />
+      <Sidebar />
+      <ChatScreen />
     </main>
   );
 };
