@@ -2,9 +2,15 @@ import styles from "./chatProfile.module.scss";
 
 const defaultProfileImage = "/images/profiles/avatardefault.webp";
 
-const ChatProfile = ({ username, img, isTyping, imgSectionClassName }) => {
+const ChatProfile = ({
+  onClick,
+  username,
+  img,
+  isTyping,
+  imgSectionClassName,
+}) => {
   return (
-    <div className={styles.profile}>
+    <div className={styles.profile} onClick={onClick}>
       <div
         className={
           imgSectionClassName
