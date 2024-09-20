@@ -28,6 +28,10 @@ const ChatProfilesContainer = () => {
       setChatMessages(messages);
     });
     setSocketIo(socket);
+
+    return () => {
+      socket.off("chatMessages");
+    };
   }, []);
 
   return (
