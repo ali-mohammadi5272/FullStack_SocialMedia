@@ -11,10 +11,7 @@ const ChatProfilesContainer = () => {
   const { user, users, setContact } = useContext(AuthContext);
 
   const joinRoom = (contact) => {
-    socketIo.emit("joinRoom", [
-      `${user.username}-${contact.username}`,
-      `${contact.username}-${user.username}`,
-    ]);
+    socketIo.emit("joinRoom", [user._id, contact._id]);
   };
 
   const chatProfileClickHandler = (userInfo) => {
