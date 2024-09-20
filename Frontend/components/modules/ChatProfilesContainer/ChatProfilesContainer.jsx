@@ -34,6 +34,7 @@ const ChatProfilesContainer = () => {
     <section className={styles.chatProfilesContainer}>
       {users.map(
         (userInfo) =>
+          user &&
           user._id !== userInfo._id && (
             <ChatProfile
               key={userInfo._id}
