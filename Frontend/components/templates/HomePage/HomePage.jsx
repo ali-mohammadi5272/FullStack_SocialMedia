@@ -10,7 +10,7 @@ import { SocketContext } from "@/contexts/SocketProvider";
 
 const HomePage = () => {
   const [socketIo, setSocketIo] = useState(null);
-  const { user, setUser, setUsers, chatMessages } = useContext(AuthContext);
+  const { setUser, setUsers } = useContext(AuthContext);
   const io = useContext(SocketContext);
   const router = useRouter();
 
@@ -65,10 +65,7 @@ const HomePage = () => {
   return (
     <main className={styles.main}>
       <Sidebar />
-      <ChatScreen
-        messages={user ? chatMessages : []}
-        userId={user && user._id}
-      />
+      <ChatScreen />
     </main>
   );
 };
