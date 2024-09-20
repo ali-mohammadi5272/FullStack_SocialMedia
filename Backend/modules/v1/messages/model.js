@@ -14,7 +14,7 @@ const schema = new mongoose.Schema(
     },
     receiverId: {
       type: mongoose.Types.ObjectId,
-      ref: "Room",
+      ref: "User",
       required: true,
     },
     edited: {
