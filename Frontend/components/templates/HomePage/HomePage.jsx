@@ -1,5 +1,5 @@
 "use client";
- import { useEffect, useContext, useState } from "react";
+import { useEffect, useContext, useState } from "react";
 import styles from "./homePage.module.scss";
 import { axiosRequest } from "@/services/axios";
 import { AuthContext } from "@/contexts/AuthProvider";
@@ -10,7 +10,7 @@ import { SocketContext } from "@/contexts/SocketProvider";
 
 const HomePage = () => {
   const [socketIo, setSocketIo] = useState(null);
-  const { setUser, setUsers } = useContext(AuthContext);
+  const { user, setUser, setUsers, chatMessages } = useContext(AuthContext);
   const io = useContext(SocketContext);
   const router = useRouter();
 
@@ -65,7 +65,10 @@ const HomePage = () => {
   return (
     <main className={styles.main}>
       <Sidebar />
-      <ChatScreen />
+      <ChatScreen
+        messages={user ? chatMessages : []}
+        userId={user && user._id}
+      />
     </main>
   );
 };
