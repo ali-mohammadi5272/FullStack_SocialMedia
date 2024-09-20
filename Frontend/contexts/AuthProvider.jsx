@@ -7,6 +7,7 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [users, setUsers] = useState([]);
   const [contact, setContact] = useState(null);
+  const [chatMessages, setChatMessages] = useState([]);
 
   return (
     <AuthContext.Provider
@@ -17,6 +18,8 @@ const AuthProvider = ({ children }) => {
         setContact,
         users,
         setUsers,
+        chatMessages,
+        setChatMessages,
       }}
     >
       {children}
