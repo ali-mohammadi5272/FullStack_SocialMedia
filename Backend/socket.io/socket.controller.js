@@ -5,18 +5,10 @@ const sendUsers = async (socket) => {
   socket.emit("users", users);
 };
 
-const joinRoom = async (socket) => {
+const joinRoomHandler = async (io, socket) => {
   socket.on("joinRoom", (rooms) => {
-    const roomsArray = Array.from(socket.rooms);
-
-    if (roomsArray.length > 1) {
-      socket.leave(roomsArray[1]);
-      socket.leave(roomsArray[2]);
-    }
-    rooms.forEach((room) => {
-      socket.join(room);
-    });
+    joinRoom(socket, rooms);
   });
 };
 
-module.exports = { sendUsers, joinRoom };
+module.exports = { sendUsers, joinRoomHandler };
