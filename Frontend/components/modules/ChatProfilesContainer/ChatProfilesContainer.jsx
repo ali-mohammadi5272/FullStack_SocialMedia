@@ -8,7 +8,7 @@ import { SocketContext } from "@/contexts/SocketProvider";
 const ChatProfilesContainer = () => {
   const [socketIo, setSocketIo] = useState(null);
   const io = useContext(SocketContext);
-  const { user, users, setContact } = useContext(AuthContext);
+  const { user, users, setContact, setChatMessages } = useContext(AuthContext);
 
   const joinRoom = (contact) => {
     socketIo.emit("joinRoom", [user._id, contact._id]);
@@ -24,6 +24,9 @@ const ChatProfilesContainer = () => {
       socketIo.close();
     }
     const socket = io("ws://localhost:3000/chats");
+    socket.on("chatMessages", (messages) => {
+      setChatMessages(messages);
+    });
     setSocketIo(socket);
   }, []);
 
