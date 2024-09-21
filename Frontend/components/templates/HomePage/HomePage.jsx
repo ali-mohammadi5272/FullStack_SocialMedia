@@ -10,9 +10,15 @@ import { SocketContext } from "@/contexts/SocketProvider";
 
 const HomePage = () => {
   const [socketIo, setSocketIo] = useState(null);
-  const { setUser, setUsers } = useContext(AuthContext);
   const io = useContext(SocketContext);
   const router = useRouter();
+  const {
+    setUser,
+    setUsers,
+    setChatMessages,
+    namespaceSocket,
+    setNamespaceSocket,
+  } = useContext(AuthContext);
 
   const getUser = async (accessToken) => {
     try {
@@ -49,6 +55,21 @@ const HomePage = () => {
     });
   };
 
+  const namespaceSocketHandler = () => {
+    if (namespaceSocket) {
+      namespaceSocket.close();
+    }
+    const socket = io("ws://localhost:3000/chats");
+    socket.on("chatMessages", (messages) => {
+      setChatMessages(messages);
+    });
+    setNamespaceSocket(socket);
+
+    return () => {
+      socket.off("chatMessages");
+    };
+  };
+
   useEffect(() => {
     const cookies = document.cookie.split(";");
     if (!(cookies.length >= 2)) {
@@ -59,6 +80,7 @@ const HomePage = () => {
         .replace(/accessToken=/, "");
       authHandler(accessToken);
       socketHandler();
+      namespaceSocketHandler();
     }
   }, []);
 
