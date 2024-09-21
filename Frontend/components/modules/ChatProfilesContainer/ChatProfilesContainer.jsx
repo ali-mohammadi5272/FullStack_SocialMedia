@@ -3,36 +3,18 @@ import styles from "./chatProfilesContainer.module.scss";
 import { useContext, useState, useEffect } from "react";
 import { AuthContext } from "@/contexts/AuthProvider";
 import ChatProfile from "../ChatProfile/ChatProfile";
-import { SocketContext } from "@/contexts/SocketProvider";
 
 const ChatProfilesContainer = () => {
-  const [socketIo, setSocketIo] = useState(null);
-  const io = useContext(SocketContext);
-  const { user, users, setContact, setChatMessages } = useContext(AuthContext);
+  const { user, users, setContact, namespaceSocket } = useContext(AuthContext);
 
   const joinRoom = (contact) => {
-    socketIo.emit("joinRoom", [user._id, contact._id]);
+    namespaceSocket.emit("joinRoom", [user._id, contact._id]);
   };
 
   const chatProfileClickHandler = (userInfo) => {
     setContact({ ...userInfo, isTyping: false });
     joinRoom(userInfo);
   };
-
-  useEffect(() => {
-    if (socketIo) {
-      socketIo.close();
-    }
-    const socket = io("ws://localhost:3000/chats");
-    socket.on("chatMessages", (messages) => {
-      setChatMessages(messages);
-    });
-    setSocketIo(socket);
-
-    return () => {
-      socket.off("chatMessages");
-    };
-  }, []);
 
   return (
     <section className={styles.chatProfilesContainer}>
