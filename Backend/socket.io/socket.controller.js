@@ -67,8 +67,8 @@ const insertMessageToDatabase = async (message) => {
 };
 
 const getMessageFromClientHandler = async (io, socket, rooms) => {
-  socket.on("submitChatMessage", async (data) => {
-    await insertMessageToDatabase(data);
+  socket.on("submitChatMessage", async (message) => {
+    await insertMessageToDatabase(message);
     const messages = await getRoomsMessagesFromDatabase(rooms);
     await sendMessagesToRooms(io, rooms, messages);
   });
