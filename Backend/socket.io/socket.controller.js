@@ -40,7 +40,7 @@ const getRoomsMessagesFromDatabase = async (rooms) => {
   }
 };
 
-const sendMessagesToRooms = async (io, rooms, data) => {
+const sendMessagesToRooms = async (io, rooms, messages) => {
   const convertedRoom = [
     `${rooms[0]}___${rooms[1]}`,
     `${rooms[1]}___${rooms[0]}`,
@@ -49,7 +49,7 @@ const sendMessagesToRooms = async (io, rooms, data) => {
   io.of("/chats")
     .in(convertedRoom[0])
     .in(convertedRoom[1])
-    .emit("chatMessages", data);
+    .emit("chatMessages", messages);
 };
 
 const insertMessageToDatabase = async (message) => {
