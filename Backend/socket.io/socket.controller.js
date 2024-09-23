@@ -6,6 +6,10 @@ const getAllUsersFromDatabase = async () => {
   return users;
 };
 
+const sendUsers = (socket, users) => {
+  socket.emit("users", users);
+};
+
 const joinRoom = (socket, rooms) => {
   const roomsArray = Array.from(socket.rooms);
   const convertedRoom = [
@@ -84,4 +88,4 @@ const joinRoomHandler = (io, socket) => {
   });
 };
 
-module.exports = { sendUsers, joinRoomHandler };
+module.exports = { sendUsersToClientHandler, joinRoomHandler };
