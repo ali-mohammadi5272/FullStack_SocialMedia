@@ -10,6 +10,11 @@ const sendUsers = (socket, users) => {
   socket.emit("users", users);
 };
 
+const sendUsersToClientHandler = async (socket) => {
+  const users = await getAllUsersFromDatabase();
+  sendUsers(socket, users);
+};
+
 const joinRoom = (socket, rooms) => {
   const roomsArray = Array.from(socket.rooms);
   const convertedRoom = [
