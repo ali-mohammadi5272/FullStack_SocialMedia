@@ -52,12 +52,12 @@ const sendMessagesToRooms = async (io, rooms, data) => {
     .emit("chatMessages", data);
 };
 
-const insertMessageToDatabase = async (data) => {
+const insertMessageToDatabase = async (message) => {
   try {
     await messageModel.create({
-      creatorId: data.creatorId,
-      body: data.message,
-      receiverId: data.receiverId,
+      creatorId: message.creatorId,
+      body: message.message,
+      receiverId: message.receiverId,
       edited: 0,
       deleted: 0,
     });
