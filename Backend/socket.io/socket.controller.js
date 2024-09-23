@@ -74,10 +74,13 @@ const getMessageFromClientHandler = async (io, socket, rooms) => {
   });
 };
 
-const joinRoomHandler = async (io, socket) => {
-  socket.on("joinRoom", (rooms) => {
+const joinRoomHandler = (io, socket) => {
+  socket.on("joinRoom", async (rooms) => {
+    socket.removeAllListeners("submitChatMessage");
     joinRoom(socket, rooms);
-    sendMessagesToRooms(io, rooms);
+    const messages = await getRoomsMessagesFromDatabase(rooms);
+    await sendMessagesToRooms(io, rooms, messages);
+    await getMessageFromClientHandler(io, socket, rooms);
   });
 };
 
