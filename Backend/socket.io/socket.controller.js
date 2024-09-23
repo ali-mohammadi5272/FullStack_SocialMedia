@@ -40,6 +40,18 @@ const getRoomsMessagesFromDatabase = async (rooms) => {
   }
 };
 
+const sendMessagesToRooms = async (io, rooms, data) => {
+  const convertedRoom = [
+    `${rooms[0]}___${rooms[1]}`,
+    `${rooms[1]}___${rooms[0]}`,
+  ];
+
+  io.of("/chats")
+    .in(convertedRoom[0])
+    .in(convertedRoom[1])
+    .emit("chatMessages", data);
+};
+
 const joinRoomHandler = async (io, socket) => {
   socket.on("joinRoom", (rooms) => {
     joinRoom(socket, rooms);
