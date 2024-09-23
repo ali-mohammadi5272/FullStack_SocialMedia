@@ -4,9 +4,10 @@ import Message from "../Message/Message";
 import styles from "./chatScreen.module.scss";
 import { useContext } from "react";
 import { AuthContext } from "@/contexts/AuthProvider";
+import ChatMessageInput from "../ChatMessageInput/ChatMessageInput";
 
 const ChatScreen = () => {
-  const { chatMessages } = useContext(AuthContext);
+  const { contact, chatMessages } = useContext(AuthContext);
 
   return (
     <section className={styles.chatScreen}>
@@ -16,6 +17,7 @@ const ChatScreen = () => {
           <Message key={message._id} {...message} />
         ))}
       </section>
+      {contact && <ChatMessageInput />}
     </section>
   );
 };
