@@ -52,6 +52,20 @@ const sendMessagesToRooms = async (io, rooms, data) => {
     .emit("chatMessages", data);
 };
 
+const insertMessageToDatabase = async (data) => {
+  try {
+    await messageModel.create({
+      creatorId: data.creatorId,
+      body: data.message,
+      receiverId: data.receiverId,
+      edited: 0,
+      deleted: 0,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 const joinRoomHandler = async (io, socket) => {
   socket.on("joinRoom", (rooms) => {
     joinRoom(socket, rooms);
