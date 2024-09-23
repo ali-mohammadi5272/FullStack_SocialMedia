@@ -1,9 +1,9 @@
 const userModel = require("./../modules/v1/users/model");
 const messageModel = require("./../modules/v1/messages/model");
 
-const sendUsers = async (socket) => {
+const getAllUsersFromDatabase = async () => {
   const users = await userModel.find({}).select("-__v -password").lean();
-  socket.emit("users", users);
+  return users;
 };
 
 const joinRoom = (socket, rooms) => {
