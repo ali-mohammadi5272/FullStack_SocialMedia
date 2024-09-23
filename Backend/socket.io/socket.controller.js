@@ -23,12 +23,7 @@ const joinRoom = (socket, rooms) => {
   });
 };
 
-const sendMessagesToRooms = async (io, rooms) => {
-  const convertedRoom = [
-    `${rooms[0]}___${rooms[1]}`,
-    `${rooms[1]}___${rooms[0]}`,
-  ];
-
+const getRoomsMessagesFromDatabase = async (rooms) => {
   try {
     const messages = await messageModel
       .find({
@@ -39,11 +34,7 @@ const sendMessagesToRooms = async (io, rooms) => {
       })
       .select("-__v -password")
       .lean();
-
-    io.of("/chats")
-      .in(convertedRoom[0])
-      .in(convertedRoom[1])
-      .emit("chatMessages", messages);
+    return messages;
   } catch (err) {
     console.log(err);
   }
