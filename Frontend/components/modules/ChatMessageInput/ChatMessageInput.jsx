@@ -8,13 +8,26 @@ const ChatMessageInput = () => {
   const { user, contact, namespaceSocket } = useContext(AuthContext);
 
   const [formData, setFormData] = useState({ message: "" });
-  
+  const timeOutRef = useRef();
+
   const sendUserTypingStart = () => {
     namespaceSocket.emit("userTypingStart", {
       user,
       isTyping: true,
       rooms: [user._id, contact._id],
     });
+  };
+
+  const sendUserTypingEnd = () => {
+    clearTimeout(timeOutRef.current);
+    timeOutRef.current = setTimeout(() => {
+      namespaceSocket.emit("userTypingEnd", {
+        user,
+        isTyping: false,
+        rooms: [user._id, contact._id],
+      });
+      console.log("test");
+    }, 2000);
   };
 
   const messageInputChangeHandler = (e) => {
