@@ -108,6 +108,10 @@ const HomePage = () => {
         .replace(/accessToken=/, "");
       authHandler(accessToken);
       socketHandler();
+
+      return () => {
+        socketIo.off("users");
+      };
     }
   }, []);
 
