@@ -75,6 +75,11 @@ const HomePage = () => {
     });
   };
 
+  const detectUserTypingStatusHandler = (socket) => {
+    detectUserTypingStartStatus(socket);
+    detectUserTypingEndStatus(socket);
+  };
+
   const namespaceSocketHandler = () => {
     if (namespaceSocket) {
       namespaceSocket.close();
@@ -83,6 +88,7 @@ const HomePage = () => {
     socket.on("chatMessages", (messages) => {
       setChatMessages(messages);
     });
+    detectUserTypingStatusHandler(socket);
     setNamespaceSocket(socket);
 
     return () => {
