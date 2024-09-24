@@ -66,6 +66,15 @@ const HomePage = () => {
     });
   };
 
+  const detectUserTypingEndStatus = (socket) => {
+    socket.off("userTypingEnd");
+    socket.on("userTypingEnd", (data) => {
+      if (user._id !== data.user) {
+        setContact((prev) => ({ ...prev, isTyping: data.isTyping }));
+      }
+    });
+  };
+
   const namespaceSocketHandler = () => {
     if (namespaceSocket) {
       namespaceSocket.close();
