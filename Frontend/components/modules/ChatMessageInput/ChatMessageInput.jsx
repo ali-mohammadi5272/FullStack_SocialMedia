@@ -1,12 +1,11 @@
 "use client";
-import { useContext, useState } from "react";
+import { useContext, useState, useRef } from "react";
 import { AuthContext } from "@/contexts/AuthProvider";
 import FontAwesomeIcon from "../FontAwesomeIcon/FontAwesomeIcon";
 import styles from "./chatMessageInput.module.scss";
 
 const ChatMessageInput = () => {
   const { user, contact, namespaceSocket } = useContext(AuthContext);
-
   const [formData, setFormData] = useState({ message: "" });
   const timeOutRef = useRef();
 
@@ -30,10 +29,16 @@ const ChatMessageInput = () => {
     }, 2000);
   };
 
+  const userTypingStatusHandler = () => {
+    sendUserTypingStart();
+    sendUserTypingEnd();
+  };
+
   const messageInputChangeHandler = (e) => {
     setFormData({
       message: e.target.value,
     });
+    userTypingStatusHandler();
   };
 
   const resetForm = () => setFormData({ message: "" });
