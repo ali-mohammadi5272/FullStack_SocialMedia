@@ -62,9 +62,7 @@ const createRoom = async (req, res, next) => {
     }
 
     const image =
-      "file" in req
-        ? `${process.env.BASE_URL}/rooms/images/${req?.file?.filename}`
-        : defaultUserPhoto;
+      "file" in req ? `/rooms/images/${req?.file?.filename}` : defaultUserPhoto;
 
     const newRoom = await roomModel.create({
       ...req.body,
