@@ -28,7 +28,7 @@ const ChatProfile = ({
       <div className={styles.profile__infos}>
         <p className={styles.profile__username}>{username}</p>
         <p className={styles.profile__lastSeen}>
-          {isTyping ? `${username} is typing...` : "last seen recently"}
+          {isTyping ? "is typing..." : "last seen recently"}
         </p>
       </div>
     </div>
