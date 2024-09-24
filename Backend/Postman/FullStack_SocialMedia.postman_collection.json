@@ -66,6 +66,19 @@
             }
           },
           "response": []
+        },
+        {
+          "name": "Get Me",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/{{version}}/auth/me",
+              "host": ["{{base_url}}"],
+              "path": ["api", "{{version}}", "auth", "me"]
+            }
+          },
+          "response": []
         }
       ]
     },
@@ -184,6 +197,37 @@
           "response": []
         },
         {
+          "name": "Get all Namespaces",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/{{version}}/namespaces",
+              "host": ["{{base_url}}"],
+              "path": ["api", "{{version}}", "namespaces"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Remove Namespace",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/{{version}}/namespaces/{{id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "{{version}}", "namespaces", "{{id}}"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Rooms",
+      "item": [
+        {
           "name": "Create Room",
           "request": {
             "method": "POST",
@@ -235,19 +279,6 @@
           "response": []
         },
         {
-          "name": "Get Rooms by NamespaceId",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{base_url}}/api/{{version}}/rooms/namespace/{{id}}",
-              "host": ["{{base_url}}"],
-              "path": ["api", "{{version}}", "rooms", "namespace", "{{id}}"]
-            }
-          },
-          "response": []
-        },
-        {
           "name": "Get Room",
           "request": {
             "method": "GET",
@@ -256,6 +287,19 @@
               "raw": "{{base_url}}/api/{{version}}/rooms/{{id}}",
               "host": ["{{base_url}}"],
               "path": ["api", "{{version}}", "rooms", "{{id}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Rooms by NamespaceId",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/{{version}}/rooms/namespace/{{id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "{{version}}", "rooms", "namespace", "{{id}}"]
             }
           },
           "response": []
