@@ -92,6 +92,8 @@ const HomePage = () => {
     setNamespaceSocket(socket);
 
     return () => {
+      socket.off("userTypingStart");
+      socket.off("userTypingEnd");
       socket.off("chatMessages");
     };
   };
