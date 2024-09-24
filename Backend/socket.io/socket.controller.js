@@ -117,6 +117,11 @@ const userTypingEnd = (io, socket, rooms) => {
   });
 };
 
+const detectTypingStatusHandler = async (io, socket, rooms) => {
+  userTypingStart(io, socket, rooms);
+  userTypingEnd(io, socket, rooms);
+};
+
 const joinRoomHandler = (io, socket) => {
   socket.on("joinRoom", async (rooms) => {
     socket.removeAllListeners("submitChatMessage");
@@ -124,7 +129,7 @@ const joinRoomHandler = (io, socket) => {
     const messages = await getRoomsMessagesFromDatabase(rooms);
     await sendMessagesToRooms(io, rooms, messages);
     await getMessageFromClientHandler(io, socket, rooms);
-    await detectIsTypingStatusHandler(io, socket, rooms);
+    await detectTypingStatusHandler(io, socket, rooms);
   });
 };
 
