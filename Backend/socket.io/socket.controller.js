@@ -83,6 +83,23 @@ const getMessageFromClientHandler = async (io, socket, rooms) => {
   });
 };
 
+const userTypingStart = (io, socket, rooms) => {
+  socket.on("userTypingStart", async (info) => {
+    const convertedRoom = [
+      `${rooms[0]}___${rooms[1]}`,
+      `${rooms[1]}___${rooms[0]}`,
+    ];
+
+    io.of("/chats")
+      .in(convertedRoom[0])
+      .in(convertedRoom[1])
+      .emit("userTypingStart", {
+        user: info.user._id,
+        isTyping: info.isTyping,
+      });
+  });
+};
+
 const joinRoomHandler = (io, socket) => {
   socket.on("joinRoom", async (rooms) => {
     socket.removeAllListeners("submitChatMessage");
