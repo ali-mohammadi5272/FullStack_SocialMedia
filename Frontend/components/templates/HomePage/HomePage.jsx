@@ -13,8 +13,10 @@ const HomePage = () => {
   const io = useContext(SocketContext);
   const router = useRouter();
   const {
+    user,
     setUser,
     setUsers,
+    setContact,
     setChatMessages,
     namespaceSocket,
     setNamespaceSocket,
@@ -55,6 +57,15 @@ const HomePage = () => {
     });
   };
 
+  const detectUserTypingStartStatus = (socket) => {
+    socket.off("userTypingStart");
+    socket.on("userTypingStart", (data) => {
+      if (user._id !== data.user) {
+        setContact((prev) => ({ ...prev, isTyping: data.isTyping }));
+      }
+    });
+  };
+
   const namespaceSocketHandler = () => {
     if (namespaceSocket) {
       namespaceSocket.close();
@@ -80,9 +91,14 @@ const HomePage = () => {
         .replace(/accessToken=/, "");
       authHandler(accessToken);
       socketHandler();
-      namespaceSocketHandler();
     }
   }, []);
+
+  useEffect(() => {
+    if (user) {
+      namespaceSocketHandler();
+    }
+  }, [user]);
 
   return (
     <main className={styles.main}>
