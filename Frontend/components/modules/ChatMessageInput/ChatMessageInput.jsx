@@ -8,6 +8,14 @@ const ChatMessageInput = () => {
   const { user, contact, namespaceSocket } = useContext(AuthContext);
 
   const [formData, setFormData] = useState({ message: "" });
+  
+  const sendUserTypingStart = () => {
+    namespaceSocket.emit("userTypingStart", {
+      user,
+      isTyping: true,
+      rooms: [user._id, contact._id],
+    });
+  };
 
   const messageInputChangeHandler = (e) => {
     setFormData({
