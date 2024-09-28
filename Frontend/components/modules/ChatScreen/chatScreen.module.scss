@@ -4,7 +4,7 @@
   position: relative;
 }
 .chatSection {
-  background-color: #2d2d2d;
+  background-color: var(--bg-primary);
   background-image: url("../../../public/images/backgrounds/bg.png");
   overflow-y: auto;
   padding-top: 50px;
