@@ -1,7 +1,7 @@
 .form {
   &__label {
     width: 50%;
-    color: white;
+    color: var(--text-primary);
     display: inline-block;
     margin: 10px 0px;
   }
@@ -17,29 +17,27 @@
     font-weight: bold;
     cursor: pointer;
     &:disabled {
-      color: white;
-      border-color: #484848;
+      color: var(--text-tertiary);
+      border-color: var(--border-color-secondary);
+      box-shadow: 0px 0px 7.5px -6px black;
       &:hover {
-        background-color: #484848;
-        border-color: #484848;
+        background-color: var(--text-tertiary);
       }
     }
   }
   &__input[type="reset"] {
-    color: crimson;
-    border: 3px solid crimson;
+    color: var(--color-danger);
+    border: 3px solid var(--border-color-danger);
     &:hover {
-      background-color: crimson;
+      background-color: var(--color-danger);
       color: white;
     }
   }
   &__input[type="submit"] {
-    color: #30b630;
-    border: 3px solid #30b630;
-
+    color: var(--color-success);
+    border: 3px solid var(--border-color-success);
     &:hover {
-      background-color: #30b630;
-      border-color: #30b630;
+      background-color: var(--color-success);
       color: white;
     }
   }
