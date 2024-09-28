@@ -6,6 +6,7 @@ import CustomForm from "@/components/modules/CustomForm/CustomForm";
 import { axiosRequest } from "@/services/axios";
 import { setCookie } from "@/utils/helperFunctions";
 import ToggleThemeBtn from "@/components/modules/ToggleTheme/ToggleThemeBtn";
+import Link from "next/link";
 
 const LoginPage = () => {
   const router = useRouter();
@@ -97,6 +98,12 @@ const LoginPage = () => {
         formOnSubmit={formSubmitHandler}
         isFormEmpty={formData}
       />
+      <div>
+        <span>Not registered? </span>
+        <Link className={styles.page__link} href="/register">
+          Create an account
+        </Link>
+      </div>
       <ToggleThemeBtn className={styles.page__toggleThemeBtn} />
     </main>
   );
