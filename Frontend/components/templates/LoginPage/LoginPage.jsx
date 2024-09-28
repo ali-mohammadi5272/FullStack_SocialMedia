@@ -1,10 +1,10 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import styles from "./loginPage.module.scss";
 import CustomForm from "@/components/modules/CustomForm/CustomForm";
 import { axiosRequest } from "@/services/axios";
-import { setCookie, setDataToLocalStorage } from "@/utils/helperFunctions";
+import { setCookie } from "@/utils/helperFunctions";
 
 const LoginPage = () => {
   const router = useRouter();
