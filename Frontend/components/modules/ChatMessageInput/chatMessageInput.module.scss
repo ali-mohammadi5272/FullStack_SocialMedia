@@ -11,6 +11,7 @@
     display: flex;
     border-radius: 30px;
     overflow: hidden;
+    background-color: var(--bg-primary);
   }
   &__input {
     width: 100%;
@@ -18,13 +19,18 @@
     border: none;
     font-size: 22.5px;
     outline: none;
+    background-color: transparent;
+    &::placeholder {
+      color: var(--text-primary);
+    }
   }
   &__btn {
     padding: 0px 20px 0px 10px;
     font-size: 30px;
-    background-color: white;
+    background-color: transparent;
     border: none;
     cursor: pointer;
+    color: var(--text-primary);
     &:hover {
       color: cornflowerblue;
     }
