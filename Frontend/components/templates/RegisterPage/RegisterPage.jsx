@@ -5,6 +5,7 @@ import { useState } from "react";
 import { axiosRequest } from "@/services/axios";
 import { useRouter } from "next/navigation";
 import { setCookie } from "@/utils/helperFunctions";
+import ToggleThemeBtn from "@/components/modules/ToggleTheme/ToggleThemeBtn";
 
 const RegisterPage = () => {
   const router = useRouter();
@@ -139,6 +140,7 @@ const RegisterPage = () => {
         formOnSubmit={formSubmitHandler}
         isFormEmpty={formData}
       />
+      <ToggleThemeBtn className={styles.page__toggleThemeBtn} />
     </main>
   );
 };
