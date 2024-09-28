@@ -6,6 +6,7 @@ import { axiosRequest } from "@/services/axios";
 import { useRouter } from "next/navigation";
 import { setCookie } from "@/utils/helperFunctions";
 import ToggleThemeBtn from "@/components/modules/ToggleTheme/ToggleThemeBtn";
+import Link from "next/link";
 
 const RegisterPage = () => {
   const router = useRouter();
@@ -140,6 +141,12 @@ const RegisterPage = () => {
         formOnSubmit={formSubmitHandler}
         isFormEmpty={formData}
       />
+      <div>
+        <span>Already registered? </span>
+        <Link className={styles.page__link} href="/login">
+          Sign In
+        </Link>
+      </div>
       <ToggleThemeBtn className={styles.page__toggleThemeBtn} />
     </main>
   );
