@@ -1,6 +1,7 @@
 "use client";
 import React, { createContext, useState } from "react";
 import { themes } from "@/utils/constants";
+import { ToastContainer } from "react-toastify";
 
 export const ThemeContext = createContext();
 
@@ -30,6 +31,7 @@ const ThemeProvider = ({ children }) => {
     >
       <div className="App" data-theme={theme}>
         {children}
+        <ToastContainer theme={theme === themes.DARK ? "dark" : "light"} />
       </div>
     </ThemeContext.Provider>
   );
