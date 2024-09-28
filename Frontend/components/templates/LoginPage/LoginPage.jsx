@@ -12,7 +12,7 @@ const LoginPage = () => {
 
   const inputs = [
     {
-      id: 3,
+      id: 1,
       inputId: "username/email",
       keyName: "identifier",
       placeholder: "Username/Email",
@@ -20,7 +20,7 @@ const LoginPage = () => {
       type: "text",
     },
     {
-      id: 7,
+      id: 2,
       inputId: "password",
       keyName: "password",
       placeholder: "Password",
