@@ -5,6 +5,7 @@ import AxiosProvider from "@/contexts/AxiosProvider";
 import { Inter } from "next/font/google";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import SocketProvider from "@/contexts/SocketProvider";
+import ThemeProvider from "@/contexts/ThemeProvider";
 
 config.autoAddCss = false;
 
@@ -20,7 +21,9 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         <AxiosProvider>
-          <SocketProvider>{children}</SocketProvider>
+          <SocketProvider>
+            <ThemeProvider>{children}</ThemeProvider>
+          </SocketProvider>
         </AxiosProvider>
       </body>
     </html>
