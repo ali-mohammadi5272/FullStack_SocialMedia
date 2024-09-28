@@ -5,9 +5,10 @@
   flex-direction: column;
   gap: 50px;
   height: 100vh;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
   &__title {
     text-align: center;
-    color: white;
     font-size: 100px;
   }
   &__form {
