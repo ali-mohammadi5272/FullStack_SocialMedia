@@ -1,7 +1,6 @@
 "use client";
 import React, { createContext, useState } from "react";
 import { themes } from "@/utils/constants";
-import ToggleThemeBtn from "@/components/modules/ToggleTheme/ToggleThemeBtn";
 
 export const ThemeContext = createContext();
 
@@ -30,7 +29,6 @@ const ThemeProvider = ({ children }) => {
       }}
     >
       <div className="App" data-theme={theme}>
-        <ToggleThemeBtn />
         {children}
       </div>
     </ThemeContext.Provider>
