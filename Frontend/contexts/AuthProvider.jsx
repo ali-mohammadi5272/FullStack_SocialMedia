@@ -9,6 +9,7 @@ const AuthProvider = ({ children }) => {
   const [contact, setContact] = useState(null);
   const [chatMessages, setChatMessages] = useState([]);
   const [namespaceSocket, setNamespaceSocket] = useState(null);
+  const [showSideBar, setShowSideBar] = useState(false);
 
   return (
     <AuthContext.Provider
@@ -23,6 +24,8 @@ const AuthProvider = ({ children }) => {
         setChatMessages,
         namespaceSocket,
         setNamespaceSocket,
+        showSideBar,
+        setShowSideBar,
       }}
     >
       {children}
