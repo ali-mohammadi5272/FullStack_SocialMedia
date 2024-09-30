@@ -16,4 +16,16 @@
     align-items: center;
     font-size: 30px;
   }
+  &__showSideBarIconBtn {
+    all: unset;
+    display: none;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .header {
+    &__showSideBarIconBtn {
+      display: inline;
+    }
+  }
 }
