@@ -16,8 +16,8 @@ const ChatScreen = () => {
         {chatMessages.map((message) => (
           <Message key={message._id} {...message} />
         ))}
+        {contact && <ChatMessageInput />}
       </section>
-      {contact && <ChatMessageInput />}
     </section>
   );
 };
