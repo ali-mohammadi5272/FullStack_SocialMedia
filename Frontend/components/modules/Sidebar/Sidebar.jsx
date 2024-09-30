@@ -3,12 +3,11 @@ import { useContext } from "react";
 import { AuthContext } from "@/contexts/AuthProvider";
 import ChatProfilesContainer from "../ChatProfilesContainer/ChatProfilesContainer";
 import styles from "./sidebar.module.scss";
-import FontAwesomeIcon from "../FontAwesomeIcon/FontAwesomeIcon";
+import CloseOffCanvasMenuBtn from "../CloseOffCanvasMenuBtn/CloseOffCanvasMenuBtn";
 
 const Sidebar = () => {
   const { showSideBar, setShowSideBar } = useContext(AuthContext);
 
-  const showSideBarHandler = () => setShowSideBar((prev) => !prev);
   const offCanvasMenuClick = () => setShowSideBar(false);
 
   return (
@@ -17,12 +16,7 @@ const Sidebar = () => {
         className={`${styles.aside} ${showSideBar ? styles.aside_active : ""}`}
       >
         <header className={styles.aside__header}>
-          <button
-            onClick={showSideBarHandler}
-            className={styles.aside__hideSideBarIconBtn}
-          >
-            <FontAwesomeIcon icon="faXmark" />
-          </button>
+          <CloseOffCanvasMenuBtn className={styles.aside__hideSideBarIconBtn} />
         </header>
         <ChatProfilesContainer />
       </aside>
