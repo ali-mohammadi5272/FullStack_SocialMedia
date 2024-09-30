@@ -10,10 +10,17 @@ const ChatHeader = () => {
 
   return (
     <header className={styles.header}>
-      {contact && (
-        <ChatProfile username={contact.username} isTyping={contact.isTyping} />
-      )}
-      <ToggleThemeBtn />
+      <div className={styles.header__profileSection}>
+        {contact && (
+          <ChatProfile
+            username={contact.username}
+            isTyping={contact.isTyping}
+          />
+        )}
+      </div>
+      <div className={styles.header__iconsSection}>
+        <ToggleThemeBtn />
+      </div>
     </header>
   );
 };
